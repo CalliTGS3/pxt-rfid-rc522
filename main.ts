@@ -489,6 +489,19 @@ namespace MFRC522 {
        return id
    }
 
+   /*
+    * Function to test card if ID available
+    */
+   //% block="Test card and read ID"
+   //% weight=93
+   export function testID() {
+       let id = readID()
+       if (!(id)) {
+           id = 0
+       }
+       return id
+   }
+
     /*
      * Function to read Data from card
      */
@@ -525,7 +538,7 @@ namespace MFRC522 {
   }
 
   /*
-   * TUrn off antenna
+   * Turn off antenna
    */
   //% block="Turn off antenna"
   //% text
