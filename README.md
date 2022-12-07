@@ -1,4 +1,6 @@
- MakeCode Package for the Joy-IT SBC-RFID-RC522 RFID module and AZ-Delivery RFID Kit RC522 (MFRC522).
+MakeCode Package for the Joy-IT SBC-RFID-RC522 RFID module and AZ-Delivery RFID Kit RC522 (MFRC522).
+
+Copied and changed for Calliope mini from joy-it/pxt-rfid-mfrc522.
 
 This library provides a Microsoft Makecode package for the Joy-IT SBC-RFID-RC522 RFID module and RFID Kit RC522 (MFRC522) modules.
 See https://joy-it.net/products/SBC-RFID-RC522 or https://www.az-delivery.de/products/rfid-set for more details.
