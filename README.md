@@ -1,31 +1,78 @@
+ MakeCode Package for the Joy-IT SBC-RFID-RC522 RFID module and AZ-Delivery RFID Kit RC522 (MFRC522).
 
-> Diese Seite bei [https://callitgs3.github.io/pxt-rfid-rc522/](https://callitgs3.github.io/pxt-rfid-rc522/) öffnen
+This library provides a Microsoft Makecode package for the Joy-IT SBC-RFID-RC522 RFID module and RFID Kit RC522 (MFRC522) modules.
+See https://joy-it.net/products/SBC-RFID-RC522 or https://www.az-delivery.de/products/rfid-set for more details.
 
-## Als Erweiterung verwenden
+## Connection
 
-Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
+The display needs to be connected with six pins to the Micro:bit:
 
-* öffne [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
-* klicke auf **Neues Projekt**
-* klicke auf **Erweiterungen** unter dem Zahnrad-Menü
-* nach **https://github.com/callitgs3/pxt-rfid-rc522** suchen und importieren
+| RFID module   | Calliope mini |
+| ------------- |:-------------:|
+| VCC           | 3V            |
+| GND           | GND           |
+| MOSI          | C9            |
+| MISO          | C8            |
+| SCK           | C7            |
+| SDA           | P0            |
 
-## Dieses Projekt bearbeiten ![Build Status Abzeichen](https://github.com/callitgs3/pxt-rfid-rc522/workflows/MakeCode/badge.svg)
+## Initialize module
 
-Um dieses Repository in MakeCode zu bearbeiten.
+The RFID module needs to be initialized before it is ready to use. All necessary commands will be transfered via SPI here.
 
-* öffne [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
-* klicke auf **Importieren** und dann auf **Importiere URL**
-* füge **https://github.com/callitgs3/pxt-rfid-rc522** ein und klicke auf Importieren
+```typescript
+// Initialize RIFD module
+MFRC522.Init(DigitalPin.C9,DigitalPin.C8,DigitalPin.C7,DigitalPin.P0)
+```
 
-## Blockvorschau
+## Read ID from card
+This function reads the cards unique ID and returns it.
 
-Dieses Bild zeigt den Blockcode vom letzten Commit im Master an.
-Die Aktualisierung dieses Bildes kann einige Minuten dauern.
+```typescript
+// Read unique ID
+basic.forever(function () {
+  let id = MFRC522.getID().toString()
+})
+```
 
-![Eine gerenderte Ansicht der Blöcke](https://github.com/callitgs3/pxt-rfid-rc522/raw/master/.github/makecode/blocks.png)
+## Test if card available and read ID
+This function tests if card is available and reads the cards unique ID and returns it.
 
-#### Metadaten (verwendet für Suche, Rendering)
+```typescript
+// Test and read unique ID
+basic.forever(function () {
+  let id = MFRC522.testID().toString()
+})
+```
 
-* for PXT/calliopemini
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+## Read data from card
+Data stored on the card can be retrieved with this function.
+
+```typescript
+// Read data
+let data = MFRC522.read()
+```
+
+## Write data to card
+Write data, formatted as string, to the card.
+
+```typescript
+// Write data
+MFRC522.write("1234")
+```
+
+## Turn off antenna
+After use, the antenna can be turned off.
+
+```typescript
+// Turn antenna off
+MFRC522.AntennaOff()
+```
+
+## Supported targets
+
+* for PXT/Calliope
+
+## License
+
+MIT
